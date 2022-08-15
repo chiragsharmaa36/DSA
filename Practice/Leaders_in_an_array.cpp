@@ -6,18 +6,19 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-vector<int> leaders(int a[], int n)
+vector<int> leaders(int a[], int n) // Optimized: O(n)
 {
 
     vector<int> leaders{a[n - 1]};
     int maxi = 0;
     for (int i = n - 1; i > 0; i--)
     {
-        maxi = max(maxi, a[i]); 
-        cout<<maxi<<endl;
-        if (a[i - 1] >= maxi){
+        maxi = max(maxi, a[i]);
+        // cout<<maxi<<endl; // for debug
+        if (a[i - 1] >= maxi)
+        {
             leaders.push_back(a[i - 1]);
-            cout<<"a[i-1] = "<<a[i-1]<<endl;
+            // cout<<"a[i-1] = "<<a[i-1]<<endl; // for debug
         }
     }
 
