@@ -12,117 +12,117 @@ using namespace std;
 // int equilibriumPoint(long long a[], int n) // Brute Force
 // {
 
-//     bool flag = false;
-//     if (n == 1)
-//         return 1;
-//     else if (n == 2)
-//         return -1;
+    // bool flag = false;
+    // if (n == 1)
+    //     return 1;
+    // else if (n == 2)
+    //     return -1;
 
-//     int sumL = 0;
-//     int sumR = 0;
-//     int j;
-//     for (int i = 0; i < n - 2; i++)
-//     {
-//         sumL += a[i];
-//         cout << "sumL = " << sumL << endl;
-//         j = n - 1;
-//         while (j - i > 1)
-//         {
-//             sumR += a[j];
-//             cout << "sumR = " << sumR << endl;
-//             j--;
-//         }
-//         if (sumL == sumR)
-//         {
-//             flag = true;
-//             break;
-//         }
-//         sumR = 0;
-//         if (flag == true)
-//             break;
-//     }
+    // int sumL = 0;
+    // int sumR = 0;
+    // int j;
+    // for (int i = 0; i < n - 2; i++)
+    // {
+    //     sumL += a[i];
+    //     cout << "sumL = " << sumL << endl;
+    //     j = n - 1;
+    //     while (j - i > 1)
+    //     {
+    //         sumR += a[j];
+    //         cout << "sumR = " << sumR << endl;
+    //         j--;
+    //     }
+    //     if (sumL == sumR)
+    //     {
+    //         flag = true;
+    //         break;
+    //     }
+    //     sumR = 0;
+    //     if (flag == true)
+    //         break;
+    // }
 
-//     if (flag == true)
-//         return j = j + 1;
-//     else
-//         return -1;
+    // if (flag == true)
+    //     return j = j + 1;
+    // else
+    //     return -1;
 // }
 
 // int equilibriumPoint(long long a[], int n) // Try
 // {
-//     bool flag = false;
-//     if (n == 1)
-//         return 1;
+    // bool flag = false;
+    // if (n == 1)
+    //     return 1;
 
-//     // int sumL = 0;
-//     // int sumR = 0;
+    // // int sumL = 0;
+    // // int sumR = 0;
 
-//     // int i;
-//     // for (i = 0; i < n; i++)
-//     // {
-//     //     sumL += a[i];
-//     //     cout << "sumL=" << sumL << endl;
+    // // int i;
+    // // for (i = 0; i < n; i++)
+    // // {
+    // //     sumL += a[i];
+    // //     cout << "sumL=" << sumL << endl;
 
-//     //     // if (n - 2 * i - 1 > 1)
-//     //     {
-//     //         if (sumL == sumR)
-//     //         {
-//     //             flag = true;
-//     //             break;
-//     //         }
-//     //     }
+    // //     // if (n - 2 * i - 1 > 1)
+    // //     {
+    // //         if (sumL == sumR)
+    // //         {
+    // //             flag = true;
+    // //             break;
+    // //         }
+    // //     }
 
-//     //     sumR += a[n - i - 1];
-//     //     cout << "sumR=" << sumR << endl;
-//     // }
-//     // if (flag)
-//     //     return i = i + 1 + 1;
-//     // else
-//     //     return -1;
+    // //     sumR += a[n - i - 1];
+    // //     cout << "sumR=" << sumR << endl;
+    // // }
+    // // if (flag)
+    // //     return i = i + 1 + 1;
+    // // else
+    // //     return -1;
 
-//     int sumJ = a[0];
-//     int sumK = a[n - 1];
+    // int sumJ = a[0];
+    // int sumK = a[n - 1];
 
-//     // for (int j = 1, k = n - 2; j < k; j++, k--)
-//     // {
-//     //     sumJ += a[j];
-//     //     sumK += a[k];
-//     // }
-//     int outerWhile = 0;
-//     int innerWhileJ = 0;
-//     int innerWhileK = 0;
-//     int j = 1, k = n - 2;
-//     while (j != k)
-//     {
+    // // for (int j = 1, k = n - 2; j < k; j++, k--)
+    // // {
+    // //     sumJ += a[j];
+    // //     sumK += a[k];
+    // // }
+    // int outerWhile = 0;
+    // int innerWhileJ = 0;
+    // int innerWhileK = 0;
+    // int j = 1, k = n - 2;
+    // while (j != k)
+    // {
 
-//         outerWhile++;
+    //     outerWhile++;
 
-//         if (sumJ < sumK)
-//         {
-//             innerWhileJ++;
-//             sumJ += a[j];
-//             j++;
-//         }
-//         if (sumJ > sumK)
-//         {
-//             innerWhileK++;
-//             sumK += a[k];
-//             k--;
-//         }
-//     }
+    //     if (sumJ < sumK)
+    //     {
+    //         innerWhileJ++;
+    //         sumJ += a[j];
+    //         j++;
+    //     }
+    //     if (sumJ > sumK)
+    //     {
+    //         innerWhileK++;
+    //         sumK += a[k];
+    //         k--;
+    //     }
+    // }
 
-//     cout << "outer while " << outerWhile << endl;
-//     cout << "inner while j " << innerWhileJ << endl;
-//     cout << "inner while k " << innerWhileK << endl;
-//     if (sumJ == sumK && k - j == 0)
-//     {
-//         flag = true;
-//     }
+    // cout << "outer while " << outerWhile << endl;
+    // cout << "inner while j " << innerWhileJ << endl;
+    // cout << "inner while k " << innerWhileK << endl;
+    // if (sumJ == sumK && k - j == 0)
+    // {
+    //     flag = true;
+    // }
 
-//     if (flag)
-//         return j = j + 1;
-//     else
-//         return -1;
+    // if (flag)
+    //     return j = j + 1;
+    // else
+    //     return -1;
 // }
 
 int equilibriumPoint(long long a[], int n) // Optimized: O(n)
