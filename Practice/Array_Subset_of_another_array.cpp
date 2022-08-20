@@ -52,34 +52,34 @@ using namespace std;
 //         return "No";
 // }
 
-string isSubset(int a1[], int a2[], int n, int m) //Optimised: O(n)
+string isSubset(int a1[], int a2[], int n, int m) // Optimised: O(n)
 {
-    unordered_map<int, int> map1; // <no., no. of occurrences> // a1 array
-    unordered_map<int, int> map2; // <no., no. of occurrences> // a2 array
+    unordered_map<int, int> map1; // <no., it's no. of occurrences> // a1 array
+    unordered_map<int, int> map2; // <no., it's no. of occurrences> // a2 array
 
     for (int i = 0; i < n; i++)
     {
-        if(map1.count(a1[i]))
-            map1[a1[i]] = map1.at(a1[i])+1;
+        if (map1.count(a1[i]))
+            map1[a1[i]] = map1.at(a1[i]) + 1;
         else
             map1[a1[i]] = 0;
     }
 
     for (int i = 0; i < m; i++)
     {
-        if(map2.count(a2[i]))
-            map2[a2[i]] = map2.at(a2[i])+1;
+        if (map2.count(a2[i]))
+            map2[a2[i]] = map2.at(a2[i]) + 1;
         else
             map2[a2[i]] = 0;
     }
 
     int count = 0;
-    for (auto i:map2) // traversing map2.
+    for (auto i : map2) // traversing map2.
     {
-        if (map1.find(i.first) != map1.end()) // another method to check if a key is present in the map or not.
+        if (map1.find(i.first) != map1.end()) // another method to check if a key is present in the map1 or not.
         {
-            if((map1.at(i.first)>=map2.at(i.first)))
-            count++;
+            if ((map1.at(i.first) >= map2.at(i.first)))
+                count++;
         }
     }
 
