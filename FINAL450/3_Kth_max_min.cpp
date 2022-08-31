@@ -6,6 +6,9 @@
 
 using namespace std;
 
+// arr : given array
+// l : starting index of the array i.e 0
+// r : ending index of the array i.e size-1
 // k is the kth smallest number
 
 int kth(int arr[], int l, int r, int k)

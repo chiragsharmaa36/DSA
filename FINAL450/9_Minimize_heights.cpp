@@ -1,3 +1,17 @@
+// Minimize the Heights II
+// Given an array arr[] denoting heights of N towers and a positive integer K.
+
+// For each tower, you must perform exactly one of the following operations exactly once.
+
+// Increase the height of the tower by K.
+// Decrease the height of the tower by K ( you can do this operation only if the height of the tower is greater than or equal to K)
+// Find out the minimum possible difference between the height of the shortest and tallest towers after you have modified each tower.
+
+// Note: It is compulsory to increase or decrease the height by K for each tower.
+
+// Expected Time Complexity: O(N*logN)
+// Expected Auxiliary Space: O(N)
+
 #include <iostream>
 #include <climits>
 #include <Algorithm>
@@ -14,7 +28,7 @@ void print(int arr[], int n)
 
 // int getMinDiff(int arr[], int n, int k)
 // {
-    
+
 //     int diff;
 //     sort(arr, arr + n); // Nlog(N)
 //     print(arr, n);
@@ -28,12 +42,12 @@ void print(int arr[], int n)
 //         //     continue;
 
 //         if (arr[i] >= k)
-//         { 
+//         {
 //             arr[i] = std::min(min, arr[i]-k);
 //             // arr[i] = arr[i] - k;
 //         }
 //         else
-//         { 
+//         {
 //             arr[i] = std::max(max,arr[i]+k);
 //             // arr[i] = arr[i] + k;
 //         }
@@ -124,43 +138,91 @@ void print(int arr[], int n)
 //     return diff;
 // }
 
-
 int getMinDiff(int arr[], int n, int k)
 {
     sort(arr, arr + n); // Nlog(N)
-     print(arr,n);
-    cout<<endl;
-    int Diff = arr[n-1] - arr[0];
-    
+    print(arr, n);
+    cout << endl;
+    int Diff = arr[n - 1] - arr[0];
+
     // Two-pointer method // Nlog(N)
-    int i = 0; int j = n-1;
-    
-    while(i<j)
+    int i = 0;
+    int j = n - 1;
+
+    // while (i <= j)
+    // {
+    //     if (arr[j] < k && arr[i] < k)
+    //     {
+    //         arr[i] = arr[i] + k;
+    //         arr[j] = arr[j] + k;
+    //         i++;
+    //         j--;
+    //     }
+    //     else if (arr[i] < k)
+    //     {
+    //         arr[i] = arr[i] + k;
+    //         i++;
+    //     }
+    //     else if (arr[j] == arr[i])
+    //     {
+    //         if (i != j)
+    //         {
+    //             arr[i] = arr[i] - k;
+    //             arr[j] = arr[j] - k;
+    //         }
+    //         else
+    //             arr[i] = arr[i] - k;
+
+    //         i++;
+    //         j--;
+    //     }
+    //     else if (arr[j] >= k && arr[i] >= k)
+    //     {
+    //         // if (arr[j] - arr[i] > abs(arr[j] - arr[i] - 2 * k))
+    //         {
+    //             arr[i] = arr[i] + k;
+    //             arr[j] = arr[j] - k;
+    //         }
+    //         // else
+    //         // {
+    //         //     arr[i] = arr[i] - k;
+    //         //     arr[j] = arr[j] - k;
+    //         // }
+    //         i++;
+    //         j--;
+    //     }
+    // }
+
+    while (i < j)
     {
-        if(arr[j] - arr[i] >= Diff)
-            {
-                arr[j] = arr[j] - k;
-                arr[i] = arr[i] + k;
-                Diff = abs(arr[j] - arr[i]);
-                cout<<Diff<<endl;
-                i++;
-                j--;
-            }
-            else
-            {
-                i++;
-                j--;
-            }
+        if(i==j)
+        {
+            arr[i] = arr[i] = k;
+        }
+        if (arr[j] >= k)
+        {
+            arr[j] = arr[j] - k;
+        }
+        
+        arr[i] = arr[i] + k;
+            i++;
+            j--;
+        
+
     }
-    print(arr,n);
-    cout<<endl;
+
+    print(arr, n);
+    cout << endl;
+    sort(arr, arr + n); // Nlog(N)
+    return min(arr[n - 1] - arr[0], Diff);
     return Diff;
 }
 
 int main()
 {
-    int arr[10] = {2, 6, 3, 4, 7, 2, 10, 3, 2, 1}; // k=5; output:7
-    // int arr[10] = {5, 5, 8, 6, 4, 10, 3, 8, 9, 10}; // k=5; output:7
-    // int arr[4] = {1, 5, 8, 10};    // k=2; output:5
-    cout << getMinDiff(arr, 10, 5); // Output: 7
+    // int arr[] = {2, 6, 3, 4, 7, 2, 10, 3, 2, 1}; int k=5; /*output:7*/
+    // int arr[] = {5, 5, 8, 6, 4, 10, 3, 8, 9, 10}; int k=5; /*output:7*/
+    // int arr[] = {1, 5, 8, 10}; int k=2; /*output:5*/
+    // int arr[] = {3, 9, 12, 16, 20}; int k=3; /*output:11*/
+    cout << getMinDiff(arr, sizeof(arr) / sizeof(arr[0]), k);
 }
