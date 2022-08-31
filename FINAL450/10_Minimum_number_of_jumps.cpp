@@ -52,11 +52,11 @@ using namespace std;
 //     return jump;
 // }
 
-int minJumps(int arr[], int n)
+int minJumps(int arr[], int n) // Optimized: O(n)
 {
     int jump = 0;
-    int pos = 0;
-    int des = 0;
+    int pos = 0; // position
+    int des = 0; // destination
 
     for (int i = 0; i < n - 1; i++)
     {

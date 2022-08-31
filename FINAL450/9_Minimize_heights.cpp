@@ -138,84 +138,104 @@ void print(int arr[], int n)
 //     return diff;
 // }
 
-int getMinDiff(int arr[], int n, int k)
+// int getMinDiff(int arr[], int n, int k) ...TRY
+// {
+//     sort(arr, arr + n); // Nlog(N)
+//     print(arr, n);
+//     cout << endl;
+//     int Diff = arr[n - 1] - arr[0];
+
+//     // Two-pointer method // Nlog(N)
+//     int i = 0;
+//     int j = n - 1;
+
+// while (i <= j)
+// {
+//     if (arr[j] < k && arr[i] < k)
+//     {
+//         arr[i] = arr[i] + k;
+//         arr[j] = arr[j] + k;
+//         i++;
+//         j--;
+//     }
+//     else if (arr[i] < k)
+//     {
+//         arr[i] = arr[i] + k;
+//         i++;
+//     }
+//     else if (arr[j] == arr[i])
+//     {
+//         if (i != j)
+//         {
+//             arr[i] = arr[i] - k;
+//             arr[j] = arr[j] - k;
+//         }
+//         else
+//             arr[i] = arr[i] - k;
+
+//         i++;
+//         j--;
+//     }
+//     else if (arr[j] >= k && arr[i] >= k)
+//     {
+//         // if (arr[j] - arr[i] > abs(arr[j] - arr[i] - 2 * k))
+//         {
+//             arr[i] = arr[i] + k;
+//             arr[j] = arr[j] - k;
+//         }
+//         // else
+//         // {
+//         //     arr[i] = arr[i] - k;
+//         //     arr[j] = arr[j] - k;
+//         // }
+//         i++;
+//         j--;
+//     }
+// }
+
+//     while (i < j)
+//     {
+//         if(i==j)
+//         {
+//             arr[i] = arr[i] = k;
+//         }
+//         if (arr[j] >= k)
+//         {
+//             arr[j] = arr[j] - k;
+//         }
+
+//         arr[i] = arr[i] + k;
+//             i++;
+//             j--;
+
+//     }
+
+//     print(arr, n);
+//     cout << endl;
+//     sort(arr, arr + n); // Nlog(N)
+//     return min(arr[n - 1] - arr[0], Diff);
+//     return Diff;
+// }
+
+int getMinDiff(int arr[], int n, int k) // Optimized:O(n)✅
 {
-    sort(arr, arr + n); // Nlog(N)
-    print(arr, n);
-    cout << endl;
-    int Diff = arr[n - 1] - arr[0];
 
-    // Two-pointer method // Nlog(N)
-    int i = 0;
-    int j = n - 1;
+    sort(arr, arr + n);
+    int minEle, maxEle;
+    int result = arr[n - 1] - arr[0];
 
-    // while (i <= j)
-    // {
-    //     if (arr[j] < k && arr[i] < k)
-    //     {
-    //         arr[i] = arr[i] + k;
-    //         arr[j] = arr[j] + k;
-    //         i++;
-    //         j--;
-    //     }
-    //     else if (arr[i] < k)
-    //     {
-    //         arr[i] = arr[i] + k;
-    //         i++;
-    //     }
-    //     else if (arr[j] == arr[i])
-    //     {
-    //         if (i != j)
-    //         {
-    //             arr[i] = arr[i] - k;
-    //             arr[j] = arr[j] - k;
-    //         }
-    //         else
-    //             arr[i] = arr[i] - k;
-
-    //         i++;
-    //         j--;
-    //     }
-    //     else if (arr[j] >= k && arr[i] >= k)
-    //     {
-    //         // if (arr[j] - arr[i] > abs(arr[j] - arr[i] - 2 * k))
-    //         {
-    //             arr[i] = arr[i] + k;
-    //             arr[j] = arr[j] - k;
-    //         }
-    //         // else
-    //         // {
-    //         //     arr[i] = arr[i] - k;
-    //         //     arr[j] = arr[j] - k;
-    //         // }
-    //         i++;
-    //         j--;
-    //     }
-    // }
-
-    while (i < j)
+    for (int i = 1; i <= n - 1; i++)
     {
-        if(i==j)
+        if (arr[i] >= k)
         {
-            arr[i] = arr[i] = k;
-        }
-        if (arr[j] >= k)
-        {
-            arr[j] = arr[j] - k;
-        }
-        
-        arr[i] = arr[i] + k;
-            i++;
-            j--;
-        
+            maxEle = max(arr[i - 1] + k, arr[n - 1] - k);
+            minEle = min(arr[0] + k, arr[i] - k);
 
+            result = min(result, maxEle - minEle);
+        }
     }
 
-    print(arr, n);
-    cout << endl;
-    sort(arr, arr + n); // Nlog(N)
-    return min(arr[n - 1] - arr[0], Diff);
-    return Diff;
+    return result;
 }
 
 int main()
@@ -223,6 +243,7 @@ int main()
     // int arr[] = {2, 6, 3, 4, 7, 2, 10, 3, 2, 1}; int k=5; /*output:7*/
     // int arr[] = {5, 5, 8, 6, 4, 10, 3, 8, 9, 10}; int k=5; /*output:7*/
     // int arr[] = {1, 5, 8, 10}; int k=2; /*output:5*/
-    // int arr[] = {3, 9, 12, 16, 20}; int k=3; /*output:11*/
+    int arr[] = {3, 9, 12, 16, 20};
+    int k = 3; /*output:11*/
     cout << getMinDiff(arr, sizeof(arr) / sizeof(arr[0]), k);
 }
