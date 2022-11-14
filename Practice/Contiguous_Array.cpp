@@ -135,27 +135,52 @@ using namespace std;
 //     return max_len;
 // }
 
-int findMaxLength(vector<int> &nums) // Polish the last approach...
+// int findMaxLength(vector<int> &nums) // 20-08-22
+// Polish the last approach...
+// // Time complexity: O(n); Space complexity: O(n)…because of the hash map.
+// {
+//     int max_len = 0;
+//     int count = 0;
+//     unordered_map<int, int> m; // <count, index>
+//     m[0] = -1;                 // when subarray starts with index 0.
+//     for (int i = 0; i < nums.size(); i++)
+//     {
+//         if (nums[i] == 0)
+//             count = count - 1;
+//         else
+//             count = count + 1;
+
+//         if (m.count(count))
+//             max_len = max(max_len, i - m.at(count));
+//         else
+//             m[count] = i;
+//     }
+
+//     return max_len;
+// }
+
+int findMaxLength(vector<int> &nums) // 9-11-22
 // Time complexity: O(n); Space complexity: O(n)…because of the hash map.
 {
-    int max_len = 0;
-    int count = 0;
-    unordered_map<int, int> m; // <count, index>
-    m[0] = -1; // when subarray starts with index 0.
-    for (int i = 0; i < nums.size(); i++)
+    // Idea: In the array of 0's and 1's, replace all 0's with -1.
+    unordered_map<int, int> m;
+    int preSum = 0, len = 0;
+    int N = nums.size();
+
+    for (int i = 0; i < N; i++)
     {
         if (nums[i] == 0)
-            count = count - 1;
-        else
-            count = count + 1;
-
-        if (m.count(count))
-            max_len = max(max_len, i - m.at(count));
-        else
-            m[count] = i;
+            nums[i] = -1;
+        preSum += nums[i];
+        if (preSum == 0)
+            len = i + 1;
+        if (m.find(preSum) != m.end())
+            len = max(len, i - m[preSum]);
+        if (m.find(preSum) == m.end())
+            m.insert({preSum, i});
     }
 
-    return max_len;
+    return len;
 }
 
 int main()
